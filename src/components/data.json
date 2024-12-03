@@ -1,0 +1,102 @@
+[
+	{
+		"answer": "Ask the customer for more clarification on the change",
+		"options": [
+			"Accept the change and update the requirements",
+			"Reject the change and stick to the original requirements",
+			"Ask the customer for more clarification on the change",
+			"Schedule a meeting with the team to discuss the change"
+		],
+		"question": "You are working on an Agile project and the customer requests a change in the requirements of the product. What should you do?"
+	},
+	{
+		"answer": "To deliver working software in short iterations with continuous feedback",
+		"options": [
+			"To follow a rigid project plan",
+			"To deliver a fully functional product at the end of the project",
+			"To deliver working software in short iterations with continuous feedback",
+			"To maximize the use of available resources"
+		],
+		"question": "What is the primary goal of Agile software development?"
+	},
+	{
+		"answer": "Help the team member to improve their skills and workflow",
+		"options": [
+			"Assign more tasks to the team member",
+			"Reassign tasks to other team members",
+			"Help the team member to improve their skills and workflow",
+			"Increase the project timeline"
+		],
+		"question": "A team member is struggling to meet the deadlines of an Agile project. What should the team leader do?"
+	},
+	{
+		"answer": "A Sprint is a short-term iteration with continuous feedback",
+		"options": [
+			"A Sprint is a short-term project phase",
+			"A Sprint is a long-term project phase",
+			"A Sprint is a short-term iteration with continuous feedback",
+			"A Sprint is a long-term iteration with fixed requirements"
+		],
+		"question": "What is the difference between a Sprint in Agile and a Waterfall project?"
+	},
+	{
+		"answer": "Ask the customer for more clarification on the feature",
+		"options": [
+			"Accept the feature and update the requirements",
+			"Reject the feature and stick to the original requirements",
+			"Ask the customer for more clarification on the feature",
+			"Schedule a meeting with the team to discuss the feature"
+		],
+		"question": "A customer requests a feature that is not in the original requirements. What should you do?"
+	},
+	{
+		"answer": "To facilitate communication and collaboration among team members",
+		"options": [
+			"To manage the team and its workflow",
+			"To coordinate the team's activities",
+			"To facilitate communication and collaboration among team members",
+			"To ensure the team's quality and efficiency"
+		],
+		"question": "What is the purpose of the Scrum Master in an Agile team?"
+	},
+	{
+		"answer": "Seek clarification from the customer",
+		"options": [
+			"Rely on intuition and make assumptions",
+			"Seek clarification from the customer",
+			"Wait until the customer provides clear requirements",
+			"Use a specific methodology to gather requirements"
+		],
+		"question": "A team is working on an Agile project and the requirements are not clear. What should you do?"
+	},
+	{
+		"answer": "To improve team efficiency",
+		"options": [
+			"To improve team efficiency",
+			"To reduce project timelines",
+			"To increase customer satisfaction",
+			"To simplify team workflow"
+		],
+		"question": "What is the benefit of using Kanban in Agile software development?"
+	},
+	{
+		"answer": "Provide additional training and support",
+		"options": [
+			"Suspend the team member and assign them to a different project",
+			"Provide additional training and support",
+			"Help the team member to identify and fix the issues",
+			"Use automated tools to fix the issues"
+		],
+		"question": "A team member is struggling with code quality issues. What should the team leader do?"
+	},
+	{
+		"answer": "Flexibility and adaptability",
+		"options": [
+			"Rigidity and predictability",
+			"Flexibility and adaptability",
+			"Centralized decision-making",
+			"Scalability and efficiency"
+		],
+		"question": "What is the primary characteristic of Agile software development?"
+	}
+]
