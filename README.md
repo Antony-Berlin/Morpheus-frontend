@@ -10,3 +10,10 @@ Currently, two official plugins are available:
 ## Setup
 
 To install dependencies:
+ ```bash
+    npm install
+```
+
+ ```bash
+   npm run dev
+```
