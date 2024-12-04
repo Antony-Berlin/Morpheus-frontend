@@ -10,6 +10,7 @@ export const QuizState = createContext();
 function App() {
   const [activeTab, setActiveTab] = useState("GenerateQuiz");
   const [Quiz, setQuiz] = useState({});
+  
 
   const renderContent = () => {
     switch (activeTab) {
@@ -26,15 +27,11 @@ function App() {
 
   return (
     <QuizState.Provider value={{ Quiz, setQuiz }}>
-      <div>
-        {/* <div className="absolute inset-0 z-5">
-          <img
-            src="src/assets/bg.jpg"
-            alt="Background"
-            className="w-full h-full object-cover"
-          />
-        </div> */}
+      <div className='bg-img'>
+       
         {Object.keys(Quiz).length === 0 && (
+          <div>
+           
           <div className="flex h-screen relative overflow-hidden">
             <div className="relative z-10 w-1/4 bg-green-800 bg-opacity-20 p-4 backdrop-filter backdrop-blur-sm text-white border-r-2 border-green-500 flex flex-col ">
               <h1 className="text-2xl font-bold my-8 p-4 text-green-500">
@@ -74,12 +71,19 @@ function App() {
               {renderContent()}
             </div>
           </div>
+      
+        </div>)}
+        {Quiz.hasOwnProperty("QuizQuestion") &&(
+          <div>
+          
+          <QuizPage />
+          </div>
         )}
-        {Object.keys(Quiz).length > 0 &&
-          <QuizPage/>
-        }
+        
       </div>
+      
     </QuizState.Provider>
+
   );
 }
 

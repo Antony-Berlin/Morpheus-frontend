@@ -1,0 +1,7 @@
+.bg-img {
+    background-image: url('/bg.jpg');
+    background-size: cover;
+    /* blur bg; */
+    background-repeat: no-repeat;
+    height: 100vh;
+}

@@ -39,16 +39,64 @@ const GenerateQuiz = () => {
             console.error("Please select a file, profile, and enter the number of questions.");
             return;
         }
-        setQuiz({...Quiz, num_of_questions : numQuestions, file_name: selectedFile, prof_name: selectedProfile});
+        setQuiz({...Quiz, num_of_questions : numQuestions, file_name: selectedFile, prof_name: selectedProfile, Questions: []});
         axios
           .post("/api/extract_text", { file_name: selectedFile})
           .then((response) => {
             console.log("extracted text");
             setQuiz({...Quiz, text: response.data.text});
-            axios.post("/api/get_topics",   { text: response.data.text })
-            .then((response) => { 
+            axios.post("/api/get_topics",   { text: response.data.text, no_of_questions: numQuestions})
+            .then((topic_response) => { 
                 console.log("Topics extracted");
-                setQuiz({...Quiz, topics: response.data.topics});
+                setQuiz({
+                    num_of_questions: numQuestions,
+                    file_name: selectedFile,
+                    prof_name: selectedProfile,
+                    text: response.data.text,
+                    topics: topic_response.data.topics,
+                });
+
+                var questionswithans =[];
+                var questions = []
+                console.log("Topics extracted: ", topic_response.data.topics);
+                console.log("Topics length: ", topic_response.data.topics.length);
+                for (let i = 0; i < topic_response.data.topics.length; i++) {
+                // for (let i = 0; i < 2; i++) {
+                var topic = topic_response.data.topics[i];
+                
+                    axios
+                      .post("/api/get_questions", {
+                        topic: topic,
+                        about_prof: selectedProfile,
+                        prof_sample_question: "",
+                        no_of_questions: numQuestions/(topic_response.data.topics.length),
+                        file_text: response.data.text,
+                        questions: questions
+                      })
+                      .then((question_response) => {
+                        questionswithans = questionswithans.concat(
+                          question_response.data
+                        );
+                        questions = questions.concat(question_response.data.map(q => q.question));
+                        console.log("Questions extracted: ", questionswithans);
+                        setQuiz({
+                          num_of_questions: numQuestions,
+                          file_name: selectedFile,
+                          prof_name: selectedProfile,
+                          text: response.data.text,
+                          topics: topic_response.data.topics,
+                          QuizQuestion: questionswithans,
+                          Questions: questions
+                        });
+                      })
+                      .catch((error) => {
+                        console.error(
+                          "There was an error fetching the questions!",
+                          error
+                        );
+                      });
+                }
+                
              });
           }
           ).catch((error) => {
