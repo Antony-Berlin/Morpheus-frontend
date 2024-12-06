@@ -60,24 +60,36 @@ const GenerateQuiz = () => {
                 var questions = []
                 console.log("Topics extracted: ", topic_response.data.topics);
                 console.log("Topics length: ", topic_response.data.topics.length);
-                for (let i = 0; i < topic_response.data.topics.length; i++) {
-                // for (let i = 0; i < 2; i++) {
-                var topic = topic_response.data.topics[i];
-                
+
+                axios.post("/api/get_proff_profile", {
+                  proff_name: selectedProfile,
+                }).then((prof_response) => {
+                  console.log("Proff profile extracted");
+                  var about_prof = prof_response.data.about_prof;
+                  var proff_sample_question =
+                    prof_response.data.prof_sample_question;
+
+                  for (let i = 0; i < topic_response.data.topics.length; i++) {
+                    // for (let i = 0; i < 2; i++) {
+                    var topic = topic_response.data.topics[i];
+
                     axios
                       .post("/api/get_questions", {
                         topic: topic,
-                        about_prof: selectedProfile,
-                        prof_sample_question: "",
-                        no_of_questions: numQuestions/(topic_response.data.topics.length),
+                        about_prof: about_prof,
+                        prof_sample_question: proff_sample_question,
+                        no_of_questions:
+                          numQuestions / topic_response.data.topics.length,
                         file_text: response.data.text,
-                        questions: questions
+                        questions: questions,
                       })
                       .then((question_response) => {
                         questionswithans = questionswithans.concat(
                           question_response.data
                         );
-                        questions = questions.concat(question_response.data.map(q => q.question));
+                        questions = questions.concat(
+                          question_response.data.map((q) => q.question)
+                        );
                         console.log("Questions extracted: ", questionswithans);
                         setQuiz({
                           num_of_questions: numQuestions,
@@ -86,7 +98,7 @@ const GenerateQuiz = () => {
                           text: response.data.text,
                           topics: topic_response.data.topics,
                           QuizQuestion: questionswithans,
-                          Questions: questions
+                          Questions: questions,
                         });
                       })
                       .catch((error) => {
@@ -95,7 +107,13 @@ const GenerateQuiz = () => {
                           error
                         );
                       });
-                }
+                  }
+
+
+                }).catch((error) => {
+                  console.error("There was an error fetching the proff profile!", error);
+                });
+                
                 
              });
           }
@@ -116,7 +134,7 @@ const GenerateQuiz = () => {
             value={selectedFile}
             onChange={(e) => setSelectedFile(e.target.value)}
           >
-            <option value="">Select an Document</option>
+        <option value="">Select a Document</option>
             {options.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -129,7 +147,7 @@ const GenerateQuiz = () => {
             value={selectedProfile}
             onChange={(e) => setSelectedProfile(e.target.value)}
           >
-            <option value="">Select an Proffessor profile</option>
+        <option value="">Select a Professor profile</option>
             {profiles.map((profile, index) => (
               <option key={index} value={profile}>
                 {profile}
@@ -141,15 +159,20 @@ const GenerateQuiz = () => {
             <label className="block text-white text-sm font-bold mb-2" htmlFor="numQuestions">
                 Number of Questions
             </label>
-            <input
-                type="number"
+        <select
                 id="numQuestions"
                 name="numQuestions"
                 className="p-2 rounded w-1/3"
-                placeholder="Enter number of questions"
                 value={numQuestions}
                 onChange={(e) => setNumQuestions(e.target.value)}
-            />
+        >
+          <option value="">Select number of questions</option>
+          {[10, 15, 20, 25, 30, 35, 40, 45, 50].map((num) => (
+            <option key={num} value={num}>
+              {num}
+            </option>
+          ))}
+        </select>
         </div>
             
         <div className="flex justify-center">
